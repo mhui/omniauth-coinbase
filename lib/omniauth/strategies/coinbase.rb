@@ -3,6 +3,7 @@ require 'omniauth-oauth2'
 module OmniAuth
   module Strategies
     class Coinbase < OmniAuth::Strategies::OAuth2
+      DEFAULT_SCOPE = "transfers+balance"
       option :name, 'coinbase'
       option :client_options, {
               :site => 'https://coinbase.com',
@@ -31,6 +32,7 @@ module OmniAuth
               params[v.to_sym] = request.params[v]
             end
           end
+          params[:scope] ||= DEFAULT_SCOPE
         end
       end
 
